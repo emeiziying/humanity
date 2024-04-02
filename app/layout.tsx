@@ -3,7 +3,7 @@ import './globals.css';
 import { Providers } from './providers';
 
 export const metadata: Metadata = {
-  title: 'Infinity',
+  title: 'Humanity',
   description: 'A simulation game of human development history',
 };
 
