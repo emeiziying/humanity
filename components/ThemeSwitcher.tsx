@@ -34,7 +34,7 @@ export function ThemeSwitcher() {
           variant='light'
           radius='full'
           className={classNames(
-            theme === item.name && 'bg-gray-300/40 hover:!bg-gray-300/40'
+            theme === item.name && 'bg-foreground/20 hover:!bg-foreground/20 '
           )}
           onClick={() => setTheme(item.name)}
         >
