@@ -1,18 +1,15 @@
 'use client';
-import useDarkMode from '@/hooks/useDarkMode';
+import Nav from '@/components/Navbar';
 import { NextUIProvider } from '@nextui-org/react';
-import classNames from 'classnames';
+import { ThemeProvider } from 'next-themes';
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const darkMode = useDarkMode();
-
   return (
-    <NextUIProvider
-      className={classNames('text-foreground bg-background', {
-        dark: darkMode,
-      })}
-    >
-      {children}
+    <NextUIProvider>
+      <ThemeProvider attribute='class'>
+        <Nav />
+        {children}
+      </ThemeProvider>
     </NextUIProvider>
   );
 }

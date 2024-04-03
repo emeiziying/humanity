@@ -9,15 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@iconify/json": "^2.2.196",
     "@nextui-org/react": "^2.2.10",
     "ahooks": "^3.7.11",
     "classnames": "^2.5.1",
     "framer-motion": "^11.0.24",
     "next": "14.1.4",
+    "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@iconify/react": "^4.1.1",
+    "@iconify/tailwind": "^0.1.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

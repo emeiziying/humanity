@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import React from 'react';
 import './globals.css';
 import { Providers } from './providers';
 
@@ -13,9 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       <body>
-        <Providers>{children}</Providers>
+        <React.StrictMode>
+          <Providers>{children}</Providers>
+        </React.StrictMode>
       </body>
     </html>
   );
