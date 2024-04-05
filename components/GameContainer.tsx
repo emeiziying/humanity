@@ -1,13 +1,12 @@
 'use client';
 
-import Game from '@/modules/Game';
-import { Card, CardBody, Tab, Tabs } from '@nextui-org/react';
-import { useRafInterval, useReactive } from 'ahooks';
-import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector, useAppStore } from '@/store/hooks';
+import { selectCount } from '@/store/modules/gameSlice';
+import { Card, CardBody, CardHeader } from '@nextui-org/react';
+import { useRafInterval } from 'ahooks';
+import Building from './Building';
 
 const GameContainer = () => {
-  const [mounted, setMounted] = useState(false);
-
   const tabs = [
     {
       lebel: '人口',
@@ -445,68 +444,62 @@ const GameContainer = () => {
     },
   ];
 
-  const [timeStamp, setTimeStamp] = useState<number>();
-  const [activeTab, setActiveTab] = useState('photos');
-
-  // const [game, setGame] = useState<Game>();
-  const game = useReactive(new Game());
-
-  // const game = use(new Game())
-
-  useEffect(() => {
-    setMounted(true);
-    // setGame(new Game());
-
-    // game.current = new Game();
-  }, []);
-  // const game = useCreation(() => new Game(), []);
-  // const game = useRef(new Game());
-  // const game = useMemo(() => new Game(), []);
-
   useRafInterval(() => {
     // game.current.update();
     // setTimeStamp(+new Date());
   }, 16);
 
-  // if (!mounted) return null;
+  const store = useAppStore();
+
+  const count = useAppSelector((state) => state.game.value);
+  const dispatch = useAppDispatch();
+  const aaa = selectCount(store.getState());
+
+  const { workers, warehouses, buildings } = useAppSelector(
+    (state) => state.game
+  );
+
+  useRafInterval(() => {
+    // dispatch(updateTimestamp(+new Date()));
+  }, 16);
 
   return (
     <div className='flex w-full flex-col'>
-      {/* {game.current._now} */}
-      {/* {game.current?._now} */}
-      {/* {timeStamp} */}
-      {/* {game._now} */}
-
-      <Tabs aria-label='Options'>
-        <Tab key='photos' title='Photos'>
-          <Card>
-            <CardBody>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </CardBody>
-          </Card>
-        </Tab>
-        <Tab key='music' title='Music'>
-          <Card>
-            <CardBody>
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </CardBody>
-          </Card>
-        </Tab>
-        <Tab key='videos' title='Videos'>
-          <Card>
-            <CardBody>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum.
-            </CardBody>
-          </Card>
-        </Tab>
-      </Tabs>
+      <div className='grid grid-cols-3 gap-2 py-10'>
+        <Card>
+          <CardHeader>Total: {workers.length}</CardHeader>
+          <CardBody>
+            {workers.map((worker) => (
+              <div key={worker.id}>{worker.name}</div>
+            ))}
+          </CardBody>
+        </Card>
+        <Card>
+          <CardBody>
+            {warehouses.map((warehouse) => (
+              <div
+                key={warehouse.id}
+                className='flex items-center justify-between'
+              >
+                <div>{warehouse.name}</div>
+                <div>{warehouse.amount}</div>
+              </div>
+            ))}
+          </CardBody>
+        </Card>
+        <Card>
+          <CardBody>
+            {buildings.map((building) => (
+              <div
+                key={building.id}
+                className='flex items-center justify-between'
+              >
+                <Building itemId={building.id} />
+              </div>
+            ))}
+          </CardBody>
+        </Card>
+      </div>
     </div>
   );
 };

@@ -1,10 +1,10 @@
-import counterReducer from '@/lib/features/counter/counterSlice';
 import { configureStore } from '@reduxjs/toolkit';
+import gameSlice from './modules/gameSlice';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      counter: counterReducer,
+      game: gameSlice,
     },
   });
 };

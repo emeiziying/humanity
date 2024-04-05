@@ -1,6 +1,6 @@
 'use client';
 import Nav from '@/components/Navbar';
-import { AppStore, makeStore } from '@/lib/store';
+import { AppStore, makeStore } from '@/store/store';
 import { NextUIProvider } from '@nextui-org/react';
 import { ThemeProvider } from 'next-themes';
 import { useRef } from 'react';
