@@ -1,8 +1,13 @@
 'use client';
 
+import Game from '@/modules/Game';
 import { Card, CardBody, Tab, Tabs } from '@nextui-org/react';
+import { useRafInterval, useReactive } from 'ahooks';
+import { useEffect, useState } from 'react';
 
-const Game = () => {
+const GameContainer = () => {
+  const [mounted, setMounted] = useState(false);
+
   const tabs = [
     {
       lebel: '人口',
@@ -440,8 +445,38 @@ const Game = () => {
     },
   ];
 
+  const [timeStamp, setTimeStamp] = useState<number>();
+  const [activeTab, setActiveTab] = useState('photos');
+
+  // const [game, setGame] = useState<Game>();
+  const game = useReactive(new Game());
+
+  // const game = use(new Game())
+
+  useEffect(() => {
+    setMounted(true);
+    // setGame(new Game());
+
+    // game.current = new Game();
+  }, []);
+  // const game = useCreation(() => new Game(), []);
+  // const game = useRef(new Game());
+  // const game = useMemo(() => new Game(), []);
+
+  useRafInterval(() => {
+    // game.current.update();
+    // setTimeStamp(+new Date());
+  }, 16);
+
+  // if (!mounted) return null;
+
   return (
     <div className='flex w-full flex-col'>
+      {/* {game.current._now} */}
+      {/* {game.current?._now} */}
+      {/* {timeStamp} */}
+      {/* {game._now} */}
+
       <Tabs aria-label='Options'>
         <Tab key='photos' title='Photos'>
           <Card>
@@ -476,4 +511,4 @@ const Game = () => {
   );
 };
 
-export default Game;
+export default GameContainer;

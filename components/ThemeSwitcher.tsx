@@ -33,9 +33,9 @@ export function ThemeSwitcher() {
           size='sm'
           variant='light'
           radius='full'
-          className={classNames(
-            theme === item.name && 'bg-foreground/20 hover:!bg-foreground/20 '
-          )}
+          className={classNames({
+            'bg-foreground/20 hover:!bg-foreground/20': theme === item.name,
+          })}
           onClick={() => setTheme(item.name)}
         >
           <Icon icon={item.icon} className='text-lg' />
