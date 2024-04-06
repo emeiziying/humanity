@@ -39,7 +39,10 @@ export interface GameState {
 const initialState: GameState = {
   value: 0,
   timestamp: 0,
-  workers: [{ id: 1, name: 'John', capacity: 1 }],
+  workers: [
+    { id: 1, name: 'John', capacity: 1 },
+    { id: 2, name: 'Tom', capacity: 1 },
+  ],
   warehouses: [
     { id: 1, name: 'Wood', amount: 0 },
     { id: 2, name: 'Stone', amount: 0 },

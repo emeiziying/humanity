@@ -1,10 +1,6 @@
 'use client';
 
-import { useAppDispatch, useAppSelector, useAppStore } from '@/store/hooks';
-import { selectCount } from '@/store/modules/gameSlice';
-import { Card, CardBody, CardHeader } from '@nextui-org/react';
-import { useRafInterval } from 'ahooks';
-import Building from './Building';
+import SectionCard, { SectionKey } from './SectionCard';
 
 const GameContainer = () => {
   const tabs = [
@@ -444,61 +440,22 @@ const GameContainer = () => {
     },
   ];
 
-  useRafInterval(() => {
-    // game.current.update();
-    // setTimeStamp(+new Date());
-  }, 16);
-
-  const store = useAppStore();
-
-  const count = useAppSelector((state) => state.game.value);
-  const dispatch = useAppDispatch();
-  const aaa = selectCount(store.getState());
-
-  const { workers, warehouses, buildings } = useAppSelector(
-    (state) => state.game
-  );
-
-  useRafInterval(() => {
-    // dispatch(updateTimestamp(+new Date()));
-  }, 16);
+  const list: { section: SectionKey; value?: string }[] = [
+    { section: 'workers', value: 'capacity' },
+    { section: 'warehouses', value: 'amount' },
+    { section: 'buildings' },
+  ];
 
   return (
     <div className='flex w-full flex-col'>
       <div className='grid grid-cols-3 gap-2 py-10'>
-        <Card>
-          <CardHeader>Total: {workers.length}</CardHeader>
-          <CardBody>
-            {workers.map((worker) => (
-              <div key={worker.id}>{worker.name}</div>
-            ))}
-          </CardBody>
-        </Card>
-        <Card>
-          <CardBody>
-            {warehouses.map((warehouse) => (
-              <div
-                key={warehouse.id}
-                className='flex items-center justify-between'
-              >
-                <div>{warehouse.name}</div>
-                <div>{warehouse.amount}</div>
-              </div>
-            ))}
-          </CardBody>
-        </Card>
-        <Card>
-          <CardBody>
-            {buildings.map((building) => (
-              <div
-                key={building.id}
-                className='flex items-center justify-between'
-              >
-                <Building itemId={building.id} />
-              </div>
-            ))}
-          </CardBody>
-        </Card>
+        {list.map((item) => (
+          <SectionCard
+            key={item.section}
+            sectionKey={item.section}
+            valueKey={item.value}
+          />
+        ))}
       </div>
     </div>
   );
