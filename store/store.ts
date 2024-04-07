@@ -1,13 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-import gameSlice from './modules/gameSlice';
+import buildingSlice from './modules/buildingSlice';
+import warehouseSlice from './modules/warehouseSlice';
+import workerSlice from './modules/workerSlice';
 
-export const makeStore = () => {
-  return configureStore({
+export const makeStore = () =>
+  configureStore({
     reducer: {
-      game: gameSlice,
+      worker: workerSlice,
+      warehouse: warehouseSlice,
+      building: buildingSlice,
     },
   });
-};
 
 // Infer the type of makeStore
 export type AppStore = ReturnType<typeof makeStore>;

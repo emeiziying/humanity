@@ -17,9 +17,12 @@ const state: State = {
   ],
 };
 
-function Foo<T extends StateKey, U = ValueKey<T>>(stateKey: T, valueKey: U) {
+function Foo<T extends StateKey, U extends ValueKey<T>>(
+  stateKey: T,
+  valueKey: U
+) {
   const list = state[stateKey];
-  list.map((item) => {
+  list.map((item: State[T][number]) => {
     console.log(item[valueKey]);
   });
 }

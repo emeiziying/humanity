@@ -1,4 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { FilterKeysOfType } from '@/types';
+import {
+  createEntityAdapter,
+  createSelector,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
 interface WorkerItem {
@@ -35,6 +41,8 @@ export interface GameState {
   warehouses: WarehouseItem[];
   buildings: BuildingItem[];
 }
+
+export type SectionKey = FilterKeysOfType<GameState, Array<any>>;
 
 const initialState: GameState = {
   value: 0,
@@ -88,6 +96,8 @@ const initialState: GameState = {
 //   );
 // }
 
+const itemsAdapter = createEntityAdapter<BuildingItem>();
+
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
@@ -140,5 +150,18 @@ export const {
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.game.value;
+
+export const selectSection = (state: RootState, sectionKey: SectionKey) =>
+  state.game[sectionKey];
+
+export const selectSectionItemIds = (
+  state: RootState,
+  sectionKey: SectionKey
+) => state.game[sectionKey].map((item) => item.id);
+
+export const selectSectionList = createSelector(
+  [selectSection],
+  (section) => section
+);
 
 export default gameSlice.reducer;

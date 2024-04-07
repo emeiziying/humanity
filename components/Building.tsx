@@ -1,18 +1,18 @@
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { updateCost, updateWarehouse } from '@/store/modules/gameSlice';
+import { selectById, updateCost } from '@/store/modules/buildingSlice';
+import { addAmount } from '@/store/modules/warehouseSlice';
+
 import { useRafInterval } from 'ahooks';
 import { useEffect, useState } from 'react';
 
 interface Props {
-  itemId: number;
+  itemId: string;
 }
 
 const Building = (props: Props) => {
   // const timestamp = useAppSelector((state) => state.game.timestamp);
   const [timestamp, setTimestamp] = useState(0);
-  const building = useAppSelector((state) =>
-    state.game.buildings.find((b) => b.id === props.itemId)
-  );
+  const building = useAppSelector((state) => selectById(state, props.itemId));
 
   const [process, setProcess] = useState(0);
   const dispatch = useAppDispatch();
@@ -36,15 +36,23 @@ const Building = (props: Props) => {
 
     if (new_cost > cost) {
       setProcess(new_process - 100);
-      dispatch(updateCost({ id: building.id, cost: new_cost - cost }));
+      dispatch(
+        updateCost({
+          id: building.id,
+          changes: { current_cost: new_cost - cost },
+        })
+      );
       building.outputs.forEach((output) => {
-        dispatch(updateWarehouse({ id: output.id, amount: output.amount }));
+        dispatch(addAmount({ id: output.warehouseId, amount: output.amount }));
       });
     } else {
       setProcess(new_process);
-      dispatch(updateCost({ id: building.id, cost: new_cost }));
+
+      dispatch(
+        updateCost({ id: building.id, changes: { current_cost: new_cost } })
+      );
     }
-  }, 16);
+  }, 1000);
 
   if (!building) return null;
 

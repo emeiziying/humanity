@@ -1,40 +1,40 @@
 import { useAppSelector } from '@/store/hooks';
 import { RootState } from '@/store/store';
 import { Card, CardBody } from '@nextui-org/react';
+import { useWhyDidYouUpdate } from 'ahooks';
 import Building from './Building';
+import SectionItem from './SectionItem';
 
-type FilterKeysOfType<T, U> = {
-  [K in keyof T]: T[K] extends U ? K : never;
-}[keyof T];
+export type SectionKey = keyof RootState;
 
-type GameState = RootState['game'];
-export type SectionKey = FilterKeysOfType<GameState, Array<any>>;
-type SectionItem<T extends SectionKey> = GameState[T][number];
-
-interface SectionCardProps<T extends SectionKey> {
-  sectionKey: T;
-  // valueKey?: keyof SectionItem<T>;
+interface SectionCardProps {
+  sectionKey: SectionKey;
   valueKey?: string;
 }
 
-export default function SectionCard<T extends SectionKey>({
+export default function SectionCard({
   sectionKey,
   valueKey,
-}: SectionCardProps<T>) {
-  const list = useAppSelector((state) => state.game[sectionKey]);
+}: SectionCardProps) {
+  // const state = useAppStore()
+  const ids = useAppSelector((state) => state[sectionKey].ids);
+
+  useWhyDidYouUpdate(`SectionCard ${sectionKey}`, { ids });
 
   return (
     <Card>
       <CardBody>
-        {list.map((item: any) => {
-          if (sectionKey === 'buildings') {
-            return <Building key={item.id} itemId={item.id} />;
+        {ids.map((item) => {
+          if (sectionKey === 'building') {
+            return <Building key={item} itemId={item} />;
           } else {
             return (
-              <div key={item.id} className='flex items-center justify-between'>
-                <div>{item.name}</div>
-                {!!valueKey && <div>{item[valueKey]}</div>}
-              </div>
+              <SectionItem
+                key={item}
+                sectionName={sectionKey}
+                itemId={item}
+                valueKey={valueKey}
+              />
             );
           }
         })}

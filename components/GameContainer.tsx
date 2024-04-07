@@ -441,10 +441,12 @@ const GameContainer = () => {
   ];
 
   const list: { section: SectionKey; value?: string }[] = [
-    { section: 'workers', value: 'capacity' },
-    { section: 'warehouses', value: 'amount' },
-    { section: 'buildings' },
+    { section: 'worker', value: 'capacity' },
+    { section: 'warehouse', value: 'amount' },
+    { section: 'building' },
   ];
+
+  console.log('GameContainer update');
 
   return (
     <div className='flex w-full flex-col'>
