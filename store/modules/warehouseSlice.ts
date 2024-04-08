@@ -14,13 +14,10 @@ const warehouseAdapter = createEntityAdapter<WarehouseItem>();
 
 export const warehouseSlice = createSlice({
   name: 'warehouse',
-  initialState: warehouseAdapter.getInitialState({
-    ids: ['1', '2'],
-    entities: {
-      1: { id: '1', name: 'Wood', amount: 0 },
-      2: { id: '2', name: 'Stone', amount: 0 },
-    },
-  }),
+  initialState: warehouseAdapter.getInitialState(undefined, [
+    { id: '1', name: 'Wood', amount: 0 },
+    { id: '2', name: 'Stone', amount: 0 },
+  ]),
   reducers: {
     // updateAmount: warehouseAdapter.updateOne,
     addAmount: (

@@ -10,6 +10,7 @@ export const makeStore = () =>
       warehouse: warehouseSlice,
       building: buildingSlice,
     },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   });
 
 // Infer the type of makeStore

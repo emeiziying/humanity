@@ -1,7 +1,6 @@
 import { useAppSelector } from '@/store/hooks';
 import { RootState } from '@/store/store';
 import { Card, CardBody } from '@nextui-org/react';
-import { useWhyDidYouUpdate } from 'ahooks';
 import Building from './Building';
 import SectionItem from './SectionItem';
 
@@ -16,10 +15,9 @@ export default function SectionCard({
   sectionKey,
   valueKey,
 }: SectionCardProps) {
-  // const state = useAppStore()
   const ids = useAppSelector((state) => state[sectionKey].ids);
 
-  useWhyDidYouUpdate(`SectionCard ${sectionKey}`, { ids });
+  console.log('SectionCard update', sectionKey, ids);
 
   return (
     <Card>

@@ -1,11 +1,14 @@
 import { useAppSelector } from '@/store/hooks';
+import { RootState } from '@/store/store';
 import { SectionKey } from './SectionCard';
 
-function SectionItem(props: {
+interface SectionItemProps {
   sectionName: SectionKey;
   itemId: string;
-  valueKey?: string;
-}) {
+  valueKey?: keyof RootState[SectionKey]['entities'][number];
+}
+
+function SectionItem(props: SectionItemProps) {
   const { sectionName, itemId, valueKey } = props;
   const item = useAppSelector((state) => state[sectionName].entities[itemId]);
   return (

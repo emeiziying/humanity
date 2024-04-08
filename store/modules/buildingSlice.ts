@@ -21,27 +21,24 @@ const buildingAdapter = createEntityAdapter<BuildingItem>();
 
 export const buildingSlice = createSlice({
   name: 'building',
-  initialState: buildingAdapter.getInitialState({
-    ids: ['1', '2'],
-    entities: {
-      1: {
-        id: '1',
-        name: 'Forest',
-        workers: [1],
-        cost: 1000,
-        outputs: [{ warehouseId: '1', amount: 1 }],
-        current_cost: 0,
-      },
-      2: {
-        id: '2',
-        name: 'Quarry',
-        workers: [1],
-        cost: 3000,
-        outputs: [{ warehouseId: '2', amount: 1 }],
-        current_cost: 0,
-      },
+  initialState: buildingAdapter.getInitialState(undefined, [
+    {
+      id: '1',
+      name: 'Forest',
+      workers: ['1'],
+      cost: 1000,
+      outputs: [{ warehouseId: '1', amount: 1 }],
+      current_cost: 0,
     },
-  }),
+    {
+      id: '2',
+      name: 'Quarry',
+      workers: ['1'],
+      cost: 3000,
+      outputs: [{ warehouseId: '2', amount: 1 }],
+      current_cost: 0,
+    },
+  ]),
   reducers: {
     updateCost: buildingAdapter.updateOne,
   },

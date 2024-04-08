@@ -12,19 +12,17 @@ export interface WorkerItem {
   id: string;
   name: string;
   capacity: number;
+  type?: WorkerType;
 }
 
 const workerAdapter = createEntityAdapter<WorkerItem>();
 
 export const workerSlice = createSlice({
   name: 'worker',
-  initialState: workerAdapter.getInitialState({
-    ids: ['1', '2'],
-    entities: {
-      1: { id: '1', name: 'John', capacity: 1 },
-      2: { id: '2', name: 'Tom', capacity: 1 },
-    },
-  }),
+  initialState: workerAdapter.getInitialState(undefined, [
+    { id: '1', name: 'John', capacity: 1 },
+    { id: '2', name: 'Tom', capacity: 1 },
+  ]),
   reducers: {
     addWorker: {
       reducer: workerAdapter.addOne,
