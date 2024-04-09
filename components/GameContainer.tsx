@@ -1,6 +1,7 @@
 'use client';
 
-import SectionCard, { SectionKey } from './SectionCard';
+import { SectionKey } from '@/types/store';
+import SectionCard from './SectionCard';
 
 const GameContainer = () => {
   const tabs = [

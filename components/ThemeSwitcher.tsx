@@ -25,7 +25,7 @@ export function ThemeSwitcher() {
   }
 
   return (
-    <div className='flex items-center bg-background border-1 border-solid border-gray-300 rounded-full p-1'>
+    <div className='flex items-center rounded-full border-1 border-solid border-gray-300 bg-background p-1'>
       {themeList.map((item) => (
         <Button
           key={item.name}

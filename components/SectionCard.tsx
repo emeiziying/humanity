@@ -1,10 +1,8 @@
 import { useAppSelector } from '@/store/hooks';
-import { RootState } from '@/store/store';
+import { SectionKey } from '@/types/store';
 import { Card, CardBody } from '@nextui-org/react';
 import Building from './Building';
 import SectionItem from './SectionItem';
-
-export type SectionKey = keyof RootState;
 
 interface SectionCardProps {
   sectionKey: SectionKey;
