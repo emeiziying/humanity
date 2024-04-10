@@ -1,3 +1,4 @@
+import { SectionItem } from '@/types/store';
 import { createEntityAdapter, createSlice, nanoid } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
@@ -8,11 +9,26 @@ enum WorkerType {
   Builder = 'Builder',
 }
 
-export interface WorkerItem {
-  id: string;
-  name: string;
-  capacity: number;
+export enum Gender {
+  Male = 1,
+  Female = 2,
+}
+
+export enum WorkerStatus {
+  Idle = 'Idle',
+  Working = 'Working',
+  Carrying = 'Carrying',
+}
+
+export interface WorkerItem extends SectionItem {
   type?: WorkerType;
+  /** 产能 */
+  capacity: number;
+  age?: number;
+  gender?: Gender;
+  status?: WorkerStatus;
+  houseId?: string;
+  workingBuildingId?: string;
 }
 
 const workerAdapter = createEntityAdapter<WorkerItem>();

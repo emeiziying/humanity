@@ -1,11 +1,17 @@
 import { useAppSelector } from '@/store/hooks';
 import { RootState } from '@/store/store';
-import { SectionKey } from './SectionCard';
+import { SectionKey } from '@/types/store';
 
-interface SectionItemProps {
-  sectionName: SectionKey;
+export interface SectionItemT<
+  T extends SectionKey = SectionKey,
+  U = RootState[T]['entities'][string]
+> {
+  sectionName: T;
+  valueKey?: keyof U;
+}
+
+interface SectionItemProps extends SectionItemT {
   itemId: string;
-  valueKey?: keyof RootState[SectionKey]['entities'][number];
 }
 
 function SectionItem(props: SectionItemProps) {

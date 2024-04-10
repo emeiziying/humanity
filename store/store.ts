@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import buildingSlice from './modules/buildingSlice';
+import tasksReducer from './modules/tasksSlice';
 import warehouseSlice from './modules/warehouseSlice';
 import workerSlice from './modules/workerSlice';
 
@@ -9,6 +10,8 @@ export const makeStore = () =>
       worker: workerSlice,
       warehouse: warehouseSlice,
       building: buildingSlice,
+
+      tasks: tasksReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   });

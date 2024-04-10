@@ -2,6 +2,7 @@
 
 import { SectionKey } from '@/types/store';
 import SectionCard from './SectionCard';
+import { SectionItemT } from './SectionItem';
 
 const GameContainer = () => {
   const tabs = [
@@ -441,10 +442,10 @@ const GameContainer = () => {
     },
   ];
 
-  const list: { section: SectionKey; value?: string }[] = [
-    { section: 'worker', value: 'capacity' },
-    { section: 'warehouse', value: 'amount' },
-    { section: 'building' },
+  const sectionList: SectionItemT<SectionKey>[] = [
+    { sectionName: 'worker', valueKey: 'capacity' },
+    { sectionName: 'warehouse', valueKey: 'amount' },
+    { sectionName: 'building' },
   ];
 
   console.log('GameContainer update');
@@ -452,12 +453,8 @@ const GameContainer = () => {
   return (
     <div className='flex w-full flex-col'>
       <div className='grid grid-cols-3 gap-2 py-10'>
-        {list.map((item) => (
-          <SectionCard
-            key={item.section}
-            sectionKey={item.section}
-            valueKey={item.value}
-          />
+        {sectionList.map((item) => (
+          <SectionCard key={item.sectionName} {...item} />
         ))}
       </div>
     </div>

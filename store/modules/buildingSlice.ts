@@ -1,4 +1,5 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import { SectionItem } from '@/types/store';
+import { createEntityAdapter, createSlice, nanoid } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { WarehouseItem } from './warehouseSlice';
 import { WorkerItem } from './workerSlice';
@@ -8,13 +9,14 @@ interface OutputItem {
   amount: number;
 }
 
-interface BuildingItem {
-  id: string;
-  name: string;
+interface Job {}
+
+interface BuildingItem extends SectionItem {
   workers: WorkerItem['id'][];
   cost: number;
   outputs: OutputItem[];
   current_cost: number;
+  // jobs?:
 }
 
 const buildingAdapter = createEntityAdapter<BuildingItem>();
@@ -23,7 +25,7 @@ export const buildingSlice = createSlice({
   name: 'building',
   initialState: buildingAdapter.getInitialState(undefined, [
     {
-      id: '1',
+      id: '1' + nanoid(),
       name: 'Forest',
       workers: ['1'],
       cost: 1000,
