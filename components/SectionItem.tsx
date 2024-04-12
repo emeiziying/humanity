@@ -1,6 +1,9 @@
+'use client';
+
 import { useAppSelector } from '@/store/hooks';
 import { RootState } from '@/store/store';
 import { SectionKey } from '@/types/store';
+import { Progress } from '@nextui-org/react';
 
 export interface SectionItemT<
   T extends SectionKey = SectionKey,
@@ -17,10 +20,22 @@ interface SectionItemProps extends SectionItemT {
 function SectionItem(props: SectionItemProps) {
   const { sectionName, itemId, valueKey } = props;
   const item = useAppSelector((state) => state[sectionName].entities[itemId]);
+
+  // useWhyDidYouUpdate('SectionItem', { item });
+
   return (
     <div className='flex items-center justify-between'>
       <div>{item.name}</div>
-      {!!valueKey && <div>{item[valueKey]}</div>}
+      {!!valueKey && <div className='min-w-10'>{item[valueKey]}</div>}
+
+      {sectionName === 'tasks' && (
+        <Progress
+          aria-label='Loading...'
+          value={item.duration / 10}
+          className='max-w-md'
+          disableAnimation
+        />
+      )}
     </div>
   );
 }

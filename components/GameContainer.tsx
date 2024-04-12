@@ -1,8 +1,12 @@
 'use client';
 
+import { useAppDispatch } from '@/store/hooks';
 import { SectionKey } from '@/types/store';
+import { useRafInterval } from 'ahooks';
 import SectionCard from './SectionCard';
 import { SectionItemT } from './SectionItem';
+
+let timestamp = 0;
 
 const GameContainer = () => {
   const tabs = [
@@ -446,9 +450,25 @@ const GameContainer = () => {
     { sectionName: 'worker', valueKey: 'capacity' },
     { sectionName: 'warehouse', valueKey: 'amount' },
     { sectionName: 'building' },
+    // { sectionName: 'tasks', valueKey: '' },
   ];
 
   console.log('GameContainer update');
+
+  const dispatch = useAppDispatch();
+
+  useRafInterval(() => {
+    const now = +new Date();
+    if (!timestamp) {
+      timestamp = now;
+      return;
+    }
+    const delta = now - timestamp;
+    timestamp = now;
+    // const
+    // dispatch({ type: 'tasks/update', payload: delta });
+    dispatch({ type: 'worker/update', payload: { delta } });
+  }, 100);
 
   return (
     <div className='flex w-full flex-col'>

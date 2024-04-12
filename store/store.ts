@@ -2,12 +2,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import buildingSlice from './modules/buildingSlice';
 import tasksReducer from './modules/tasksSlice';
 import warehouseSlice from './modules/warehouseSlice';
-import workerSlice from './modules/workerSlice';
+import workerReducer from './modules/workerSlice';
 
 export const makeStore = () =>
   configureStore({
     reducer: {
-      worker: workerSlice,
+      worker: workerReducer,
       warehouse: warehouseSlice,
       building: buildingSlice,
 

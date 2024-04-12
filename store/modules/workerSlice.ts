@@ -1,5 +1,10 @@
 import { SectionItem } from '@/types/store';
-import { createEntityAdapter, createSlice, nanoid } from '@reduxjs/toolkit';
+import {
+  PayloadAction,
+  createEntityAdapter,
+  createSlice,
+  nanoid,
+} from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
 enum WorkerType {
@@ -24,11 +29,12 @@ export interface WorkerItem extends SectionItem {
   type?: WorkerType;
   /** 产能 */
   capacity: number;
-  age?: number;
-  gender?: Gender;
   status?: WorkerStatus;
-  houseId?: string;
-  workingBuildingId?: string;
+  // houseId?: string;
+  // workingBuildingId?: string;
+  // 搬运-生产-搬运
+  taskQueue: string[];
+  timestamp?: number;
 }
 
 const workerAdapter = createEntityAdapter<WorkerItem>();
@@ -36,8 +42,8 @@ const workerAdapter = createEntityAdapter<WorkerItem>();
 export const workerSlice = createSlice({
   name: 'worker',
   initialState: workerAdapter.getInitialState(undefined, [
-    { id: '1', name: 'John', capacity: 1 },
-    { id: '2', name: 'Tom', capacity: 1 },
+    { id: '1', name: 'John', capacity: 1, taskQueue: [] },
+    { id: '2', name: 'Tom', capacity: 1, taskQueue: [] },
   ]),
   reducers: {
     addWorker: {
@@ -45,6 +51,19 @@ export const workerSlice = createSlice({
       prepare: (payload: Omit<WorkerItem, 'id'>) => {
         return { payload: { id: nanoid(), ...payload } };
       },
+    },
+    addTasksToWorker: (state, action: PayloadAction<{}>) => {
+      //
+    },
+
+    update: (state, action: PayloadAction<{ delta: number }>) => {
+      const { delta } = action.payload;
+      if (!delta) return;
+
+      state.ids.forEach((id) => {
+        const worker = state.entities[id];
+        // worker.timestamp = delta;
+      });
     },
   },
 });

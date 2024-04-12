@@ -1,3 +1,5 @@
+'use client';
+
 import { useAppSelector } from '@/store/hooks';
 import { Card, CardBody } from '@nextui-org/react';
 import SectionItem, { SectionItemT } from './SectionItem';
