@@ -36,13 +36,13 @@ export const tasksSlice = createSlice({
       state.ids.forEach((id) => {
         const task = state.entities[id];
 
-        const result = task.duration + delta * (0.5 * Math.random() + 0.5);
+        // const result = task.duration + delta * (0.5 * Math.random() + 0.5);
 
-        if (result > 1000) {
-          task.duration = 0;
-        } else {
-          task.duration = result;
-        }
+        // if (result > 1000) {
+        //   task.duration = 0;
+        // } else {
+        //   task.duration = result;
+        // }
       });
       // tasksAdapter.updateMany(state, { current });
     },

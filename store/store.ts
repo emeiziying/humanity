@@ -13,7 +13,7 @@ export const makeStore = () =>
 
       tasks: tasksReducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    // middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   });
 
 // Infer the type of makeStore

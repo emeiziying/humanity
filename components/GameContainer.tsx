@@ -1,6 +1,7 @@
 'use client';
 
 import { useAppDispatch } from '@/store/hooks';
+import { updateWorkers } from '@/store/modules/workerSlice';
 import { SectionKey } from '@/types/store';
 import { useRafInterval } from 'ahooks';
 import SectionCard from './SectionCard';
@@ -467,7 +468,8 @@ const GameContainer = () => {
     timestamp = now;
     // const
     // dispatch({ type: 'tasks/update', payload: delta });
-    dispatch({ type: 'worker/update', payload: { delta } });
+    // dispatch({ type: 'worker/update', payload: { delta } });
+    dispatch(updateWorkers(delta));
   }, 100);
 
   return (

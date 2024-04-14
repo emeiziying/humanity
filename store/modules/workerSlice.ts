@@ -55,14 +55,18 @@ export const workerSlice = createSlice({
     addTasksToWorker: (state, action: PayloadAction<{}>) => {
       //
     },
-
-    update: (state, action: PayloadAction<{ delta: number }>) => {
-      const { delta } = action.payload;
+    findNewTaskForWorker: (state, action: PayloadAction<{ id: string }>) => {
+      //
+    },
+    updateWorkers: (state, action: PayloadAction<number>) => {
+      const delta = action.payload;
       if (!delta) return;
 
       state.ids.forEach((id) => {
         const worker = state.entities[id];
+        worker.timestamp = worker.timestamp || 0;
         // worker.timestamp = delta;
+        // worker.task.update()
       });
     },
   },
@@ -71,6 +75,6 @@ export const workerSlice = createSlice({
 export const { selectAll, selectById, selectTotal, selectIds } =
   workerAdapter.getSelectors<RootState>((state) => state.worker);
 
-export const { addWorker } = workerSlice.actions;
+export const { addWorker, updateWorkers } = workerSlice.actions;
 
 export default workerSlice.reducer;
