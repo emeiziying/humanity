@@ -1,17 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit';
 import buildingSlice from './modules/buildingSlice';
+import housesReducer from './modules/housesSlice';
 import tasksReducer from './modules/tasksSlice';
 import warehouseSlice from './modules/warehouseSlice';
-import workerReducer from './modules/workerSlice';
+import workersReducer from './modules/workersSlice';
 
 export const makeStore = () =>
   configureStore({
     reducer: {
-      worker: workerReducer,
+      tasks: tasksReducer,
+
+      workers: workersReducer,
+      houses: housesReducer,
+
       warehouse: warehouseSlice,
       building: buildingSlice,
-
-      tasks: tasksReducer,
     },
     // middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   });

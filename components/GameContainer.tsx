@@ -1,13 +1,13 @@
 'use client';
 
+import { useDelta } from '@/hooks/useDelta';
 import { useAppDispatch } from '@/store/hooks';
-import { updateWorkers } from '@/store/modules/workerSlice';
+import { updateTasks } from '@/store/modules/tasksSlice';
+import { updateWorkers } from '@/store/modules/workersSlice';
 import { SectionKey } from '@/types/store';
 import { useRafInterval } from 'ahooks';
 import SectionCard from './SectionCard';
 import { SectionItemT } from './SectionItem';
-
-let timestamp = 0;
 
 const GameContainer = () => {
   const tabs = [
@@ -448,7 +448,7 @@ const GameContainer = () => {
   ];
 
   const sectionList: SectionItemT<SectionKey>[] = [
-    { sectionName: 'worker', valueKey: 'capacity' },
+    { sectionName: 'workers', valueKey: 'capacity' },
     { sectionName: 'warehouse', valueKey: 'amount' },
     { sectionName: 'building' },
     // { sectionName: 'tasks', valueKey: '' },
@@ -457,18 +457,13 @@ const GameContainer = () => {
   console.log('GameContainer update');
 
   const dispatch = useAppDispatch();
+  const getDelta = useDelta();
 
   useRafInterval(() => {
-    const now = +new Date();
-    if (!timestamp) {
-      timestamp = now;
-      return;
-    }
-    const delta = now - timestamp;
-    timestamp = now;
-    // const
-    // dispatch({ type: 'tasks/update', payload: delta });
-    // dispatch({ type: 'worker/update', payload: { delta } });
+    const delta = getDelta();
+
+    // update all task
+    dispatch(updateTasks(delta));
     dispatch(updateWorkers(delta));
   }, 100);
 

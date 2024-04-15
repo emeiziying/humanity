@@ -2,7 +2,7 @@ import { SectionItem } from '@/types/store';
 import { createEntityAdapter, createSlice, nanoid } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { WarehouseItem } from './warehouseSlice';
-import { WorkerItem } from './workerSlice';
+import { WorkerItem } from './workersSlice';
 
 interface OutputItem {
   warehouseId: WarehouseItem['id'];

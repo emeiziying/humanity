@@ -1,6 +1,6 @@
 import { RootState } from '@/store/store';
 import { EntityState } from '@reduxjs/toolkit';
-import { FilterKeysOfType } from '.';
+import { FilterKeysOfType } from './utils';
 
 export type SectionItem = { id: string; name: string };
 
