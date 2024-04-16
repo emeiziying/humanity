@@ -1,5 +1,5 @@
 declare module 'humanity' {
-  export interface PrototypeMap {}
+  export type PrototypeMap = {};
 
   export interface BasePrototype {
     type: keyof PrototypeMap;
