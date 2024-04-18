@@ -81,10 +81,7 @@ export const updateWorkers = createAppAsyncThunk(
 
 export const workerSlice = createSlice({
   name: 'workers',
-  initialState: workerAdapter.getInitialState(undefined, [
-    { id: '1', name: 'John', capacity: 1, taskQueue: [] },
-    { id: '2', name: 'Tom', capacity: 1, taskQueue: [] },
-  ]),
+  initialState: workerAdapter.getInitialState(),
   reducers: {
     addWorker: {
       reducer: workerAdapter.addOne,
@@ -98,7 +95,7 @@ export const workerSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(updateWorkers.fulfilled, (state, action) => {
-      console.log('updateWorkers.fulfilled', action);
+      // console.log('updateWorkers.fulfilled', action);
     });
   },
 });

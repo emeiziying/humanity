@@ -1,7 +1,9 @@
+import Nav from '@/components/Navbar';
 import type { Metadata } from 'next';
 import React from 'react';
 import './globals.css';
-import { Providers } from './providers';
+import StoreProvider from './store-provider';
+import ThemeProvider from './theme-provider';
 
 export const metadata: Metadata = {
   title: 'Humanity',
@@ -17,7 +19,12 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body>
         <React.StrictMode>
-          <Providers>{children}</Providers>
+          <ThemeProvider>
+            <StoreProvider>
+              <Nav />
+              {children}
+            </StoreProvider>
+          </ThemeProvider>
         </React.StrictMode>
       </body>
     </html>

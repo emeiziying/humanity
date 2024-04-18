@@ -16,9 +16,7 @@ export function ThemeSwitcher() {
     { name: 'dark', icon: 'iconamoon:mode-dark-light' },
   ];
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
   if (!mounted) {
     return null;

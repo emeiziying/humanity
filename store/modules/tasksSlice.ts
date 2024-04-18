@@ -17,6 +17,7 @@ export enum TaskStatus {
 
 interface TaskItem {
   id: string;
+  name: string;
   workerId?: string;
   buildingId?: string;
   duration: number;

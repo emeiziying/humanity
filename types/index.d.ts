@@ -1,8 +1,6 @@
 declare module 'humanity' {
-  export type PrototypeMap = {};
-
   export interface BasePrototype {
-    type: keyof PrototypeMap;
+    type: string;
     name: string;
   }
 
@@ -45,16 +43,34 @@ declare module 'humanity' {
     enabled?: boolean;
   }
 
-  export interface WorkerPrototype extends EntityPrototype {
+  export interface ResourceProtoType extends BasePrototype {
+    type: 'resource';
+    name: 'forest' | 'rock mine' | 'iron mine' | 'copper mine' | 'coal mine';
+    amount: number;
+    area_size: number;
+  }
+
+  export interface BlockEntityPrototype extends EntityPrototype {
+    type: 'block';
+    resources: ResourceProtoType[];
+    enabled: boolean;
+    area_size: number;
+  }
+
+  export interface WorkerEntityPrototype extends EntityPrototype {
     type: 'worker';
     capacity: number;
   }
 
-  export interface HousePrototype extends EntityPrototype {
+  export interface HouseEntityPrototype extends EntityPrototype {
     type: 'house';
     /** how many workers the house can contain */
     max_capacity: number;
     workers: Pick<WorkerPrototype, 'id'>[];
+  }
+
+  export interface FactoryEntityPrototype extends EntityPrototype {
+    type: 'factory';
   }
 
   export type BuildingPrototype = HousePrototype;

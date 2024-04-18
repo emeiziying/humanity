@@ -1,24 +1,20 @@
 'use client';
 
 import { useAppSelector } from '@/store/hooks';
-import { RootState } from '@/store/store';
 import { SectionKey } from '@/types/store';
 import { Progress } from '@nextui-org/react';
 import { useWhyDidYouUpdate } from 'ahooks';
 
-export interface SectionItemT<
-  T extends SectionKey = SectionKey,
-  U = RootState[T]['entities'][string]
-> {
-  sectionName: T;
-  valueKey?: keyof U;
+export interface SectionItemT {
+  sectionName: SectionKey;
+  valueKey?: string;
 }
 
 interface SectionItemProps extends SectionItemT {
   itemId: string;
 }
 
-function SectionItem(props: SectionItemProps) {
+export default function SectionItem(props: SectionItemProps) {
   const { sectionName, itemId, valueKey } = props;
   const item = useAppSelector((state) => state[sectionName].entities[itemId]);
 
@@ -40,5 +36,3 @@ function SectionItem(props: SectionItemProps) {
     </div>
   );
 }
-
-export default SectionItem;

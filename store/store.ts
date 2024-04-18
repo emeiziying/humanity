@@ -1,22 +1,25 @@
 import { configureStore } from '@reduxjs/toolkit';
-import buildingSlice from './modules/buildingSlice';
+import blocksReducer from './modules/blocksSlice';
+import factoriesReducer from './modules/factoriesSlice';
+import foodsReducer from './modules/foodsSlice';
 import housesReducer from './modules/housesSlice';
 import tasksReducer from './modules/tasksSlice';
-import warehouseSlice from './modules/warehouseSlice';
+import technologiesReducer from './modules/technologiesSlice';
+import warehousesReducer from './modules/warehousesSlice';
 import workersReducer from './modules/workersSlice';
 
 export const makeStore = () =>
   configureStore({
     reducer: {
       tasks: tasksReducer,
-
+      blocks: blocksReducer,
       workers: workersReducer,
+      foods: foodsReducer,
       houses: housesReducer,
-
-      warehouse: warehouseSlice,
-      building: buildingSlice,
+      factories: factoriesReducer,
+      warehouses: warehousesReducer,
+      technologies: technologiesReducer,
     },
-    // middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   });
 
 // Infer the type of makeStore
