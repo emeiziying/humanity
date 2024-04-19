@@ -5,29 +5,9 @@ import {
   createSlice,
   nanoid,
 } from '@reduxjs/toolkit';
-import { IngredientPrototype, ProductPrototype } from 'factorio:prototype';
+import { TaskEntityPrototype } from 'humanity';
 
-export enum TaskStatus {
-  Pending = 'Pending',
-  Working = 'Working',
-  Done = 'Done',
-  Cancel = 'Cancel',
-  Fail = 'Fail',
-}
-
-interface TaskItem {
-  id: string;
-  name: string;
-  workerId?: string;
-  buildingId?: string;
-  duration: number;
-  current: number;
-  ingredients?: IngredientPrototype[];
-  results?: ProductPrototype[];
-  status: TaskStatus;
-}
-
-const tasksAdapter = createEntityAdapter<TaskItem>();
+const tasksAdapter = createEntityAdapter<TaskEntityPrototype>();
 
 export const tasksSlice = createSlice({
   name: 'tasks',
@@ -35,21 +15,21 @@ export const tasksSlice = createSlice({
   reducers: {
     addTask: {
       reducer: tasksAdapter.addOne,
-      prepare: (payload: Omit<TaskItem, 'id' | 'status'>) => ({
-        payload: { id: nanoid(), status: TaskStatus.Working, ...payload },
+      prepare: (payload: Omit<TaskEntityPrototype, 'id' | 'status'>) => ({
+        payload: { id: nanoid(), ...payload },
       }),
     },
     updateTasks: (state, action: PayloadAction<number>) => {
       const delta = action.payload || 1;
       state.ids.forEach((id) => {
         const task = state.entities[id];
-        if (task.status !== TaskStatus.Working) return;
+        // if (task.status !== TaskStatus.Working) return;
 
-        task.current += delta;
+        // task.current += delta;
 
-        if (task.current >= task.duration) {
-          task.status = TaskStatus.Done;
-        }
+        // if (task.current >= task.duration) {
+        //   task.status = TaskStatus.Done;
+        // }
       });
     },
   },

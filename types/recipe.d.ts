@@ -21,5 +21,5 @@ declare module 'humanity' {
     category: 'technology';
   }
 
-  export type RecipePrototype = TechnologyRecipePrototype;
+  // export type RecipePrototype = TechnologyRecipePrototype;
 }

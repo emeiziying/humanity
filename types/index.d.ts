@@ -52,26 +52,32 @@ declare module 'humanity' {
 
   export interface BlockEntityPrototype extends EntityPrototype {
     type: 'block';
-    resources: ResourceProtoType[];
+    resources: Partial<Record<ResourceProtoType['name'], number>>;
     enabled: boolean;
     area_size: number;
   }
 
   export interface WorkerEntityPrototype extends EntityPrototype {
     type: 'worker';
+    /** 产能 */
     capacity: number;
+    task_id: string;
   }
 
   export interface HouseEntityPrototype extends EntityPrototype {
     type: 'house';
-    /** how many workers the house can contain */
+    /** 容纳人数 */
     max_capacity: number;
-    workers: Pick<WorkerPrototype, 'id'>[];
+    workers: Pick<WorkerEntityPrototype, 'id'>[];
   }
 
   export interface FactoryEntityPrototype extends EntityPrototype {
     type: 'factory';
   }
 
-  export type BuildingPrototype = HousePrototype;
+  export type BuildingPrototype = HouseEntityPrototype | FactoryEntityPrototype;
+
+  export interface TaskEntityPrototype extends EntityPrototype {
+    type: 'task';
+  }
 }
