@@ -1,7 +1,7 @@
 import { SectionItem } from '@/types/store';
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { WorkerItem } from './workersSlice';
+import { WorkerItem } from './charactersSlice';
 
 interface HouseItem extends SectionItem {
   workers: WorkerItem['id'][];

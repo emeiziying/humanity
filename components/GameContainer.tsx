@@ -2,8 +2,7 @@
 
 import { useDelta } from '@/hooks/useDelta';
 import { useAppDispatch } from '@/store/hooks';
-import { updateTasks } from '@/store/modules/tasksSlice';
-import { updateWorkers } from '@/store/modules/workersSlice';
+import { updateCharacters } from '@/store/modules/charactersSlice';
 import { useRafInterval } from 'ahooks';
 import OverviewCard from './OverviewCard';
 import SectionCard from './SectionCard';
@@ -11,8 +10,8 @@ import { SectionItemT } from './SectionItem';
 
 const GameContainer = () => {
   const sectionList: SectionItemT[] = [
-    { sectionName: 'workers', valueKey: 'capacity' },
-    // { sectionName: 'warehouse', valueKey: 'amount' },
+    { sectionName: 'characters', valueKey: 'capacity' },
+    { sectionName: 'resources', valueKey: 'amount' },
     // { sectionName: 'building' },
     // { sectionName: 'tasks', valueKey: '' },
   ];
@@ -23,9 +22,7 @@ const GameContainer = () => {
   useRafInterval(() => {
     const delta = getDelta();
 
-    // update all task
-    dispatch(updateTasks(delta));
-    dispatch(updateWorkers(delta));
+    dispatch(updateCharacters(delta));
   }, 100);
 
   console.log('GameContainer update');

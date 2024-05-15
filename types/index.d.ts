@@ -57,8 +57,8 @@ declare module 'humanity' {
     area_size: number;
   }
 
-  export interface WorkerEntityPrototype extends EntityPrototype {
-    type: 'worker';
+  export interface CharacterEntityPrototype extends EntityPrototype {
+    type: 'character';
     /** 产能 */
     capacity: number;
     task_id: string;
@@ -68,7 +68,7 @@ declare module 'humanity' {
     type: 'house';
     /** 容纳人数 */
     max_capacity: number;
-    workers: Pick<WorkerEntityPrototype, 'id'>[];
+    workers: Pick<CharacterEntityPrototype, 'id'>[];
   }
 
   export interface FactoryEntityPrototype extends EntityPrototype {
@@ -79,5 +79,12 @@ declare module 'humanity' {
 
   export interface TaskEntityPrototype extends EntityPrototype {
     type: 'task';
+    status: TaskStatus;
+  }
+
+  export enum TaskStatus {
+    Idle = 'idle',
+    InProgress = 'in progress',
+    Done = 'done',
   }
 }

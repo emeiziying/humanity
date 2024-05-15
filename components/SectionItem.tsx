@@ -23,7 +23,9 @@ export default function SectionItem(props: SectionItemProps) {
   return (
     <div className='flex items-center justify-between'>
       <div>{item.name}</div>
-      {!!valueKey && <div className='min-w-10'>{item[valueKey]}</div>}
+      {!!valueKey && valueKey in item && (
+        <div className='min-w-10'>{item[valueKey]}</div>
+      )}
 
       {sectionName === 'tasks' && (
         <Progress
