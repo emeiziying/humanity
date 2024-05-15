@@ -1,3 +1,4 @@
+import { createAppAsyncThunk } from '@/store/hooks';
 import { SectionItem } from '@/types/store';
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 
@@ -44,6 +45,21 @@ const defaultResources = [
 ];
 
 const resourcesAdapter = createEntityAdapter<ResourceItem>();
+
+export const updateResources = createAppAsyncThunk(
+  'resources/updateResources',
+  async (delta: number, { getState, dispatch }) => {
+    const state = getState();
+
+    if (!delta) return;
+
+    const { ids, entities } = state.characters;
+
+    ids.forEach((id) => {
+      const { task_id } = entities[id];
+    });
+  }
+);
 
 export const resourcesSlice = createSlice({
   name: 'resources',

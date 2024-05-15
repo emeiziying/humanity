@@ -3,6 +3,7 @@
 import { useDelta } from '@/hooks/useDelta';
 import { useAppDispatch } from '@/store/hooks';
 import { updateCharacters } from '@/store/modules/charactersSlice';
+import { updateResources } from '@/store/modules/resourcesSlice';
 import { useRafInterval } from 'ahooks';
 import OverviewCard from './OverviewCard';
 import SectionCard from './SectionCard';
@@ -22,6 +23,7 @@ const GameContainer = () => {
   useRafInterval(() => {
     const delta = getDelta();
 
+    dispatch(updateResources(delta));
     dispatch(updateCharacters(delta));
   }, 100);
 
