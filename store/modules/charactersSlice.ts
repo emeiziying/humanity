@@ -4,7 +4,6 @@ import type { RootState } from '@/store/store'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createEntityAdapter, createSlice, nanoid } from '@reduxjs/toolkit'
 import type { CharacterEntityPrototype } from 'humanity'
-import { TaskStatus } from 'humanity'
 
 const characterAdapter = createEntityAdapter<CharacterEntityPrototype>()
 
@@ -34,7 +33,7 @@ export const updateCharacters = createAppAsyncThunk(
       if (!task) {
         // dispatch(findNewTaskForWorker(id));
         findNewTaskForCharacter(id)
-      } else if (task.status === TaskStatus.Done) {
+      } else if (task.status === 'done') {
         // 任务完成,更新库存
 
         // 刷新任务
@@ -48,18 +47,29 @@ export const charactersSlice = createSlice({
   name: 'characters',
   initialState: characterAdapter.getInitialState(),
   reducers: {
+    updateCharacter: characterAdapter.updateOne,
+    addCharacter2: characterAdapter.addOne,
     addCharacter: {
       reducer: characterAdapter.addOne,
       prepare: (
-        payload: Omit<CharacterEntityPrototype, 'id' | 'type' | 'name'>,
+        payload: Omit<
+          CharacterEntityPrototype,
+          'id' | 'type' | 'name' | 'task_id' | 'capacity'
+        >,
       ): { payload: CharacterEntityPrototype } => {
+        const data: CharacterEntityPrototype = {
+          id: nanoid(),
+          type: 'character',
+          name: 'Character',
+          task_id: '',
+          capacity: 1,
+          ...payload,
+        }
+
+        console.log('addCharacter', payload, data)
+
         return {
-          payload: {
-            id: nanoid(),
-            type: 'character',
-            name: 'Character',
-            ...payload,
-          },
+          payload: data,
         }
       },
     },
@@ -77,6 +87,7 @@ export const charactersSlice = createSlice({
 export const { selectAll, selectById, selectTotal, selectIds } =
   characterAdapter.getSelectors<RootState>((state) => state.characters)
 
-export const { addCharacter } = charactersSlice.actions
+export const { addCharacter, addCharacter2, updateCharacter } =
+  charactersSlice.actions
 
 export default charactersSlice.reducer

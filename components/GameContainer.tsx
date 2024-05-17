@@ -1,5 +1,7 @@
 'use client'
 
+import AutoSave from '@/components/AutoSave'
+import CharacterCard from '@/components/CharacterCard'
 import { useDelta } from '@/hooks/useDelta'
 import { useAppDispatch } from '@/store/hooks'
 import { updateCharacters } from '@/store/modules/charactersSlice'
@@ -10,7 +12,7 @@ import type { SectionItemT } from './SectionItem'
 
 const GameContainer = () => {
   const sectionList: SectionItemT[] = [
-    { sectionName: 'characters', valueKey: 'capacity' },
+    // { sectionName: 'characters', valueKey: 'capacity' },
     // { sectionName: 'resources', valueKey: 'amount' },
     // { sectionName: 'building' },
     // { sectionName: 'tasks', valueKey: '' },
@@ -30,8 +32,11 @@ const GameContainer = () => {
 
   return (
     <div className="flex w-full flex-col">
+      <AutoSave />
+
       <OverviewCard />
       <div className="grid grid-cols-3 gap-2 pt-2">
+        <CharacterCard />
         {sectionList.map((item) => (
           <SectionCard key={item.sectionName} {...item} />
         ))}
