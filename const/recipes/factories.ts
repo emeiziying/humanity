@@ -1,4 +1,4 @@
-import { RecipePrototype } from 'humanity';
+import type { RecipePrototype } from 'humanity'
 
 const factories: RecipePrototype[] = [
   {
@@ -8,6 +8,6 @@ const factories: RecipePrototype[] = [
     ingredients: [{ type: 'item', name: 'wooden', amount: 10 }],
     results: [{ type: 'item', name: 'workbench', amount: 1 }],
   },
-];
+]
 
-export default factories;
+export default factories

@@ -1,4 +1,4 @@
-import { BlockEntityPrototype } from 'humanity';
+import type { BlockEntityPrototype } from 'humanity';
 
 const blocks: BlockEntityPrototype[] = [
   {

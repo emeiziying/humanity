@@ -1,6 +1,6 @@
 import blocks from '@/data/modules/blocks';
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { BlockEntityPrototype } from 'humanity';
+import type { BlockEntityPrototype } from 'humanity';
 
 const blocksAdapter = createEntityAdapter<BlockEntityPrototype>();
 

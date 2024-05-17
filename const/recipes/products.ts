@@ -1,4 +1,4 @@
-import { RecipePrototype } from 'humanity';
+import type { RecipePrototype } from 'humanity';
 
 const products: RecipePrototype[] = [
   {

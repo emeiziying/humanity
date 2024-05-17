@@ -1,4 +1,4 @@
-import { RecipePrototype } from 'humanity';
+import type { RecipePrototype } from 'humanity';
 import factories from './factories';
 import houses from './houses';
 import products from './products';

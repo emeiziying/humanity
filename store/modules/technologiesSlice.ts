@@ -1,4 +1,4 @@
-import { SectionItem } from '@/types/store';
+import type { SectionItem } from '@/types/store';
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 
 interface TemplateItem extends SectionItem {}

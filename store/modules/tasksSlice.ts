@@ -1,11 +1,12 @@
-import { RootState } from '@/store/store';
+import type { RootState } from '@/store/store';
+import type {
+  PayloadAction} from '@reduxjs/toolkit';
 import {
-  PayloadAction,
   createEntityAdapter,
   createSlice,
   nanoid,
 } from '@reduxjs/toolkit';
-import { TaskEntityPrototype } from 'humanity';
+import type { TaskEntityPrototype } from 'humanity';
 
 const tasksAdapter = createEntityAdapter<TaskEntityPrototype>();
 

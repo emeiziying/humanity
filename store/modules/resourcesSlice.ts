@@ -1,5 +1,5 @@
 import { createAppAsyncThunk } from '@/store/hooks';
-import { SectionItem } from '@/types/store';
+import type { SectionItem } from '@/types/store';
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 
 interface OutputItem {

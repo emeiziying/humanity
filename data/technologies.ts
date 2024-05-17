@@ -1,4 +1,4 @@
-import { TechnologyPrototype } from 'humanity';
+import type { TechnologyPrototype } from 'humanity';
 
 const technologies: TechnologyPrototype[] = [
   {
