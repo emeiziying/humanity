@@ -1,5 +1,6 @@
 'use client'
 
+import { useAppSelector } from '@/store/hooks'
 import type { SectionKey } from '@/types/store'
 import { Progress } from '@nextui-org/react'
 import { useWhyDidYouUpdate } from 'ahooks'
@@ -15,6 +16,7 @@ interface SectionItemProps extends SectionItemT {
 
 export default function SectionItem(props: SectionItemProps) {
   const { sectionName, itemId, valueKey } = props
+  const item = useAppSelector((state) => state[sectionName].entities[itemId])
 
   useWhyDidYouUpdate(`SectionItem ${sectionName} ${itemId}`, { item })
 

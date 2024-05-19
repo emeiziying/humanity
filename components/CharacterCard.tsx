@@ -1,34 +1,44 @@
-import { useAppSelector } from '@/store/hooks'
-import { addCharacter, updateCharacter } from '@/store/modules/charactersSlice'
+'use client'
+import { useMounted } from '@/hooks/useMounted'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { addTodo } from '@/store/modules/charactersSlice'
 import { Button, Card, CardBody, CardHeader } from '@nextui-org/react'
-import { useWhyDidYouUpdate } from 'ahooks'
 
 type Props = {}
 
 const CharacterCard = (props: Props) => {
   const ids = useAppSelector((state) => state.characters.ids)
-  const items = useAppSelector((state) => state.characters.entities)
+  const dispatch = useAppDispatch()
+  const mounted = useMounted()
 
-  useWhyDidYouUpdate('CharacterCard', [ids, items])
+  if (!mounted) return
 
   return (
     <Card>
       <CardHeader>
         <Button
           onClick={() => {
-            updateCharacter({ id: '1', changes: { name: '2' } })
-            addCharacter({})
+            console.log(addTodo(1))
+
+            dispatch(addTodo(1))
+            dispatch({
+              type: 'characters/addTodo',
+              payload: { text: 2 },
+
+              // payload: {
+              //   id: nanoid(),
+              //   name: '1',
+              // },
+            })
           }}
         >
           新增
         </Button>
       </CardHeader>
       <CardBody>
-        <div className="grid grid-cols-8 gap-2">
-          {ids.map((e) => (
-            <CharacterItem itemId={e} key={e} />
-          ))}
-        </div>
+        {ids.map((e) => (
+          <CharacterItem itemId={e} key={e} />
+        ))}
       </CardBody>
     </Card>
   )

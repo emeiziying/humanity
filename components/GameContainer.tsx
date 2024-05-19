@@ -12,7 +12,7 @@ import type { SectionItemT } from './SectionItem'
 
 const GameContainer = () => {
   const sectionList: SectionItemT[] = [
-    // { sectionName: 'characters', valueKey: 'capacity' },
+    { sectionName: 'characters', valueKey: 'capacity' },
     // { sectionName: 'resources', valueKey: 'amount' },
     // { sectionName: 'building' },
     // { sectionName: 'tasks', valueKey: '' },
@@ -31,7 +31,7 @@ const GameContainer = () => {
   console.log('GameContainer update')
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex w-full flex-col py-2">
       <AutoSave />
 
       <OverviewCard />

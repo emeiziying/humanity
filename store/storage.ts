@@ -1,3 +1,4 @@
+'use client'
 import packageInfo from '@/package.json'
 import type { RootState } from '@/store/store'
 
@@ -5,10 +6,16 @@ const key = `humanity_v${packageInfo.version}`
 
 const storage = {
   save: (data: RootState) => {
-    localStorage.setItem(key, JSON.stringify(data))
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(key, JSON.stringify(data))
+    }
   },
-  load: (): RootState | undefined =>
-    JSON.parse(localStorage.getItem(key) || 'null') || undefined,
+  load: (): RootState | undefined => {
+    if (typeof localStorage !== 'undefined') {
+      return JSON.parse(localStorage.getItem(key) || 'null') || undefined
+    }
+    return undefined
+  },
 }
 
 export default storage

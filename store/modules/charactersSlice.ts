@@ -45,11 +45,9 @@ export const updateCharacters = createAppAsyncThunk(
 
 export const charactersSlice = createSlice({
   name: 'characters',
-  initialState: characterAdapter.getInitialState(),
+  initialState: characterAdapter.getInitialState({ value: 0 }),
   reducers: {
-    updateCharacter: characterAdapter.updateOne,
-    addCharacter2: characterAdapter.addOne,
-    addCharacter: {
+    addItem: {
       reducer: characterAdapter.addOne,
       prepare: (
         payload: Omit<
@@ -58,19 +56,17 @@ export const charactersSlice = createSlice({
         >,
       ): { payload: CharacterEntityPrototype } => {
         const data: CharacterEntityPrototype = {
+          ...payload,
           id: nanoid(),
           type: 'character',
           name: 'Character',
           task_id: '',
           capacity: 1,
-          ...payload,
         }
 
-        console.log('addCharacter', payload, data)
+        console.log('data', data)
 
-        return {
-          payload: data,
-        }
+        return { payload: data }
       },
     },
     addTasksToCharacter: (state, action: PayloadAction<string>) => {
@@ -87,7 +83,6 @@ export const charactersSlice = createSlice({
 export const { selectAll, selectById, selectTotal, selectIds } =
   characterAdapter.getSelectors<RootState>((state) => state.characters)
 
-export const { addCharacter, addCharacter2, updateCharacter } =
-  charactersSlice.actions
+export const { addItem, addTodo } = charactersSlice.actions
 
 export default charactersSlice.reducer
