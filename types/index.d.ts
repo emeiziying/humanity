@@ -77,6 +77,12 @@ declare module 'humanity' {
 
   export type BuildingPrototype = HouseEntityPrototype | FactoryEntityPrototype
 
+  export interface WorkstationEntityPrototype extends EntityPrototype {
+    type: 'workstation'
+    qty: number
+    outputs: any[]
+  }
+
   export interface TaskEntityPrototype extends EntityPrototype {
     type: 'task'
     status: TaskStatus

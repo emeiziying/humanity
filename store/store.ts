@@ -1,7 +1,6 @@
 import type { FilterKeysOfType } from '@/types/utils.d'
 import type { EntityState } from '@reduxjs/toolkit'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import type { CharacterEntityPrototype } from 'humanity'
 import blocksReducer from './modules/blocksSlice'
 import charactersReducer from './modules/charactersSlice'
 import factoriesReducer from './modules/factoriesSlice'
@@ -11,24 +10,13 @@ import resourcesReducer from './modules/resourcesSlice'
 import tasksReducer from './modules/tasksSlice'
 import technologiesReducer from './modules/technologiesSlice'
 import warehousesReducer from './modules/warehousesSlice'
-
-const characters: EntityState<CharacterEntityPrototype, string> = {
-  ids: ['1'],
-  entities: {
-    '1': {
-      type: 'character',
-      id: '1',
-      name: 'name_2',
-      capacity: 1,
-      task_id: '1',
-    },
-  },
-}
+import workstationsReducer from './modules/workstationsSlice'
 
 const rootReducer = combineReducers({
   tasks: tasksReducer,
   blocks: blocksReducer,
   characters: charactersReducer,
+  workstations: workstationsReducer,
   resources: resourcesReducer,
   foods: foodsReducer,
   houses: housesReducer,

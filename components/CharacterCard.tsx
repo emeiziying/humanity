@@ -1,7 +1,7 @@
 'use client'
-import { useMounted } from '@/hooks/useMounted'
+import { useMountedState } from '@/hooks/useMountedState'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { addTodo } from '@/store/modules/charactersSlice'
+import { addOne } from '@/store/modules/charactersSlice'
 import { Button, Card, CardBody, CardHeader } from '@nextui-org/react'
 
 type Props = {}
@@ -9,31 +9,14 @@ type Props = {}
 const CharacterCard = (props: Props) => {
   const ids = useAppSelector((state) => state.characters.ids)
   const dispatch = useAppDispatch()
-  const mounted = useMounted()
+  const mounted = useMountedState()
 
   if (!mounted) return
 
   return (
     <Card>
       <CardHeader>
-        <Button
-          onClick={() => {
-            console.log(addTodo(1))
-
-            dispatch(addTodo(1))
-            dispatch({
-              type: 'characters/addTodo',
-              payload: { text: 2 },
-
-              // payload: {
-              //   id: nanoid(),
-              //   name: '1',
-              // },
-            })
-          }}
-        >
-          新增
-        </Button>
+        <Button onClick={() => dispatch(addOne({}))}>新增</Button>
       </CardHeader>
       <CardBody>
         {ids.map((e) => (
@@ -52,6 +35,7 @@ const CharacterItem = (props: { itemId: string }) => {
   return (
     <div className="flex items-center justify-between">
       <div>{item.name}</div>
+      <div>status</div>
     </div>
   )
 }

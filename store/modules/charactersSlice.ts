@@ -47,7 +47,7 @@ export const charactersSlice = createSlice({
   name: 'characters',
   initialState: characterAdapter.getInitialState({ value: 0 }),
   reducers: {
-    addItem: {
+    addOne: {
       reducer: characterAdapter.addOne,
       prepare: (
         payload: Omit<
@@ -83,6 +83,6 @@ export const charactersSlice = createSlice({
 export const { selectAll, selectById, selectTotal, selectIds } =
   characterAdapter.getSelectors<RootState>((state) => state.characters)
 
-export const { addItem, addTodo } = charactersSlice.actions
+export const { addOne } = charactersSlice.actions
 
 export default charactersSlice.reducer

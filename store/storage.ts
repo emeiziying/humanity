@@ -8,11 +8,14 @@ const storage = {
   save: (data: RootState) => {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem(key, JSON.stringify(data))
+      console.log('save', data)
     }
   },
-  load: (): RootState | undefined => {
+  load: (defaultData?: Partial<RootState>): RootState | undefined => {
     if (typeof localStorage !== 'undefined') {
-      return JSON.parse(localStorage.getItem(key) || 'null') || undefined
+      const data = JSON.parse(localStorage.getItem(key) || 'null')
+      if (!data) return undefined
+      return Object.assign({}, data, defaultData)
     }
     return undefined
   },
