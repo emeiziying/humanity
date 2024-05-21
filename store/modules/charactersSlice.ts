@@ -54,20 +54,16 @@ export const charactersSlice = createSlice({
           CharacterEntityPrototype,
           'id' | 'type' | 'name' | 'task_id' | 'capacity'
         >,
-      ): { payload: CharacterEntityPrototype } => {
-        const data: CharacterEntityPrototype = {
+      ): { payload: CharacterEntityPrototype } => ({
+        payload: {
           ...payload,
           id: nanoid(),
           type: 'character',
           name: 'Character',
           task_id: '',
           capacity: 1,
-        }
-
-        console.log('data', data)
-
-        return { payload: data }
-      },
+        },
+      }),
     },
     addTasksToCharacter: (state, action: PayloadAction<string>) => {
       //

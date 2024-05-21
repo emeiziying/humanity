@@ -3,13 +3,14 @@ import { useMountedState } from '@/hooks/useMountedState'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { addOne } from '@/store/modules/charactersSlice'
 import { Button, Card, CardBody, CardHeader } from '@nextui-org/react'
+import { useWhyDidYouUpdate } from 'ahooks'
 
-type Props = {}
-
-const CharacterCard = (props: Props) => {
+const CharacterCard = () => {
   const ids = useAppSelector((state) => state.characters.ids)
   const dispatch = useAppDispatch()
   const mounted = useMountedState()
+
+  useWhyDidYouUpdate('CharacterCard', [ids])
 
   if (!mounted) return
 
@@ -31,6 +32,8 @@ const CharacterItem = (props: { itemId: string }) => {
   const item = useAppSelector(
     (state) => state.characters.entities[props.itemId],
   )
+
+  useWhyDidYouUpdate('CharacterItem', [item])
 
   return (
     <div className="flex items-center justify-between">
